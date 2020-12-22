@@ -10,4 +10,9 @@ void DrawPointerNeedle (
 		MagickWand *wand, const char *color, 
 		float strokeWidth, float tipRadius, float tailRadius, float opacity);
 
+void DrawPointerArrow (
+        MagickWand *wand, const char *color,
+        float tipRadius, float tailRadius, 
+		float width, float tailBackoff, float opacity);
+
 #endif

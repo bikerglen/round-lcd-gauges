@@ -69,3 +69,36 @@ void DrawPointerNeedle (
     DestroyDrawingWand (drawingWand);
     DestroyPixelWand (strokeColor);
 }
+
+
+void DrawPointerArrow (
+		MagickWand *wand, const char *color, 
+		float tipRadius, float tailRadius, 
+		float width, float tailBackoff, float opacity)
+{
+	DrawingWand *drawingWand;
+	PixelWand *fillColor;
+
+	drawingWand = NewDrawingWand ();
+	fillColor = NewPixelWand ();
+
+	PixelSetColor (fillColor, color);
+	DrawSetStrokeWidth (drawingWand, 0);
+	DrawSetFillColor (drawingWand, fillColor);
+	DrawSetFillOpacity (drawingWand, opacity);
+	
+	PointInfo coords[4] = {
+		{ 119.5, 120-tipRadius },
+		{ 119.5+width/2, 119.5 + tailRadius - tailBackoff },
+		{ 119.5, 120+tailRadius },
+		{ 119.5-width/2, 119.5 + tailRadius - tailBackoff }
+	};
+
+	DrawPolygon (drawingWand, 4, coords);
+
+    MagickResetIterator (wand);
+    MagickDrawImage (wand, drawingWand);
+
+    DestroyDrawingWand (drawingWand);
+    DestroyPixelWand (fillColor);
+}

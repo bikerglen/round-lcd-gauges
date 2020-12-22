@@ -66,8 +66,8 @@ int main (int argc, char *argv[])
 	wand = NewMagickWand ();
 
     DrawPointerBackground (wand);
-    DrawPointerKnub (wand, "#F45700", 10,1);
-    DrawPointerNeedle (wand, "#F45700", 2.25, 103, 30,1);
+    DrawPointerKnub (wand, "#F45700", 10, 1);
+    DrawPointerNeedle (wand, "#F45700", 2.25, 103, 30, 1);
 
     MagickResetIterator (wand);
     MagickWriteImage (wand, "pointer-red-basic.png");
@@ -87,6 +87,40 @@ int main (int argc, char *argv[])
 
 	MagickResetIterator (wand);
     MagickWriteImage (wand, "shadow-red-basic.png");
+
+	DestroyMagickWand (wand);
+
+
+	//========================================
+	// DRAW BLACK ARROW
+	// A Cool Green: #35BF5F
+	// A Cool Red:   #F45700
+	//========================================
+
+	wand = NewMagickWand ();
+
+    DrawPointerBackground (wand);
+    DrawPointerKnub (wand, "#202020", 10, 1);
+    DrawPointerArrow (wand, "#202020", 95, 30, 10, 5, 1);
+
+    MagickResetIterator (wand);
+    MagickWriteImage (wand, "pointer-black-arrow.png");
+
+    DestroyMagickWand (wand);
+
+
+	//========================================
+	// DRAW BLACK ARROW SHADOW
+	//========================================
+
+    wand = NewMagickWand ();
+
+    DrawPointerBackground (wand);
+    DrawPointerKnub (wand, "#808080", 10, 1);
+    DrawPointerArrow (wand, "#808080", 95, 30, 10, 5, 1);
+
+	MagickResetIterator (wand);
+    MagickWriteImage (wand, "shadow-black-arrow.png");
 
 	DestroyMagickWand (wand);
 
