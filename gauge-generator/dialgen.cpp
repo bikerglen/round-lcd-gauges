@@ -210,7 +210,7 @@ void LabelDial (MagickWand *wand, const char *color, const char *label)
     DrawSetFontSize (drawingWand, 22);
 	DrawSetFillColor (drawingWand, fillColor);
 
-    DrawAnnotation (drawingWand, 120, 164, (unsigned char*)"%");
+    DrawAnnotation (drawingWand, 120, 164, (unsigned char*)label);
 
 	MagickResetIterator (wand);
 	MagickDrawImage (wand, drawingWand);
