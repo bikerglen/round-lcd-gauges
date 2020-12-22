@@ -1,5 +1,4 @@
 .gitignore
 *.o
 *.png
-*.ttf
 examples
