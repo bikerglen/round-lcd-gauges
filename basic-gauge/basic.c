@@ -74,7 +74,7 @@ int main (int argc, char *argv[])
 	// wait 50 ms
 	usleep (50000);
 
-	// initialize dipslay controller
+	// initialize display controller
 	GC9A01_Initial ();
 
 	// read dial, pointer, and shadow
