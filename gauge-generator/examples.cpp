@@ -20,13 +20,13 @@ int main (int argc, char *argv[])
 	wand = NewMagickWand ();
 
 	DrawDialBackground (wand);
-	DrawDialTicks (wand, "#606060", 11, -150, 150, 89, 104);
-	DrawDialTicks (wand, "#606060", 10, -135, 135, 93, 104);
-	DrawDialTicks (wand, "#606060", 20, -147, 138, 97, 104);
-	DrawDialTicks (wand, "#606060", 20, -144, 141, 97, 104);
-	DrawDialTicks (wand, "#606060", 20, -141, 144, 97, 104);
-	DrawDialTicks (wand, "#606060", 20, -138, 147, 97, 104);
-	LabelDialTicks (wand, "#606060", 85, 11, -150, 150, 0, 100, "%0.0f");
+	DrawDialTicks (wand, "#606060", 1.5, 11, -150, 150, 89, 104);
+	DrawDialTicks (wand, "#606060", 1.5, 10, -135, 135, 93, 104);
+	DrawDialTicks (wand, "#606060", 1.5, 20, -147, 138, 97, 104);
+	DrawDialTicks (wand, "#606060", 1.5, 20, -144, 141, 97, 104);
+	DrawDialTicks (wand, "#606060", 1.5, 20, -141, 144, 97, 104);
+	DrawDialTicks (wand, "#606060", 1.5, 20, -138, 147, 97, 104);
+	LabelDialTicks (wand, "#606060", "Oswald-Light.ttf", 85, 11, -150, 150, 0, 100, "%0.0f");
 	LabelDial (wand, "#606060", "%");
 
 	MagickResetIterator (wand);
@@ -42,13 +42,13 @@ int main (int argc, char *argv[])
 	wand = NewMagickWand ();
 
 	DrawDialBackground (wand);
-	DrawDialTicks (wand, "#606060", 11, -150, 150, 89, 104);
-	DrawDialTicks (wand, "#606060", 10, -135, 135, 93, 104);
-	DrawDialTicks (wand, "#606060", 20, -147, 138, 97, 104);
-	DrawDialTicks (wand, "#606060", 20, -144, 141, 97, 104);
-	DrawDialTicks (wand, "#606060", 20, -141, 144, 97, 104);
-	DrawDialTicks (wand, "#606060", 20, -138, 147, 97, 104);
-	LabelDialTicks (wand, "#606060", 85, 6, -150, 150, 0, 1000, "%0.0f");
+	DrawDialTicks (wand, "#606060", 1.5, 11, -150, 150, 89, 104);
+	DrawDialTicks (wand, "#606060", 1.5, 10, -135, 135, 93, 104);
+	DrawDialTicks (wand, "#606060", 1.5, 20, -147, 138, 97, 104);
+	DrawDialTicks (wand, "#606060", 1.5, 20, -144, 141, 97, 104);
+	DrawDialTicks (wand, "#606060", 1.5, 20, -141, 144, 97, 104);
+	DrawDialTicks (wand, "#606060", 1.5, 20, -138, 147, 97, 104);
+	LabelDialTicks (wand, "#606060", "Oswald-Light.ttf", 85, 6, -150, 150, 0, 1000, "%0.0f");
 	LabelCo2Dial (wand, "#606060");
 
 	MagickResetIterator (wand);
@@ -66,7 +66,7 @@ int main (int argc, char *argv[])
 	wand = NewMagickWand ();
 
     DrawPointerBackground (wand);
-    DrawPointerKnub (wand, "#F45700", 10, 1);
+    DrawPointerKnub (wand, "#F45700", 119.5, 119.5, 10, 1);
     DrawPointerNeedle (wand, "#F45700", 2.25, 103, 30, 1);
 
     MagickResetIterator (wand);
@@ -82,7 +82,7 @@ int main (int argc, char *argv[])
     wand = NewMagickWand ();
 
     DrawPointerBackground (wand);
-    DrawPointerKnub (wand, "#808080", 10, 1);
+    DrawPointerKnub (wand, "#808080", 119.5, 119.5, 10, 1);
     DrawPointerNeedle (wand, "#808080", 2.25, 103, 30, 1);
 
 	MagickResetIterator (wand);
@@ -100,7 +100,7 @@ int main (int argc, char *argv[])
 	wand = NewMagickWand ();
 
     DrawPointerBackground (wand);
-    DrawPointerKnub (wand, "#202020", 10, 1);
+    DrawPointerKnub (wand, "#202020", 119.5, 119.5, 10, 1);
     DrawPointerArrow (wand, "#202020", 95, 30, 10, 5, 1);
 
     MagickResetIterator (wand);
@@ -116,7 +116,7 @@ int main (int argc, char *argv[])
     wand = NewMagickWand ();
 
     DrawPointerBackground (wand);
-    DrawPointerKnub (wand, "#808080", 10, 1);
+    DrawPointerKnub (wand, "#808080", 119.5, 119.5, 10, 1);
     DrawPointerArrow (wand, "#808080", 95, 30, 10, 5, 1);
 
 	MagickResetIterator (wand);
