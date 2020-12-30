@@ -1,4 +1,6 @@
 .gitignore
 *.o
 *.png
+*.swp
 examples
+clockish
