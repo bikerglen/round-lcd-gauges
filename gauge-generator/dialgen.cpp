@@ -87,7 +87,7 @@ void DrawDialBackground (MagickWand *wand)
 
 
 void DrawDialTicks (MagickWand *wand, 
-		const char *color, 
+		const char *color, float strokeWidth,
 		int numberTicks, float startAngle, float stopAngle,
         float startRadius, float endRadius)
 {
@@ -114,7 +114,7 @@ void DrawDialTicks (MagickWand *wand,
 		y2 = 120 + sin (angleRadians) * endRadius;
 
 		DrawSetStrokeAntialias (drawingWand, MagickTrue);
-		DrawSetStrokeWidth (drawingWand, 1.5);
+		DrawSetStrokeWidth (drawingWand, strokeWidth);
 		PixelSetColor (strokeColor, color);
 		DrawSetStrokeColor (drawingWand, strokeColor);
 		DrawLine (drawingWand, x1, y1, x2, y2);
@@ -129,7 +129,7 @@ void DrawDialTicks (MagickWand *wand,
 
 
 void LabelDialTicks (MagickWand *wand, 
-		const char *color, float radius,
+		const char *color, const char *font, float radius,
 		int numberTicks, float startAngle, float stopAngle,
 		float startLabel, float stopLabel, const char *formatSpecifier)
 {
@@ -146,7 +146,7 @@ void LabelDialTicks (MagickWand *wand,
 	fillColor = NewPixelWand ();
 
 	PixelSetColor (fillColor, color);
-	DrawSetFont (drawingWand, "Oswald-Light.ttf");
+	DrawSetFont (drawingWand, font);
 	DrawSetTextAlignment (drawingWand, CenterAlign);
 	DrawSetFontSize (drawingWand, 22);
 	DrawSetFillColor (drawingWand, fillColor);

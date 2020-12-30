@@ -4,12 +4,12 @@
 void DrawDialBackground (MagickWand *wand);
 
 void DrawDialTicks (MagickWand *wand, 
-		const char *color, 
+		const char *color, float strokeWidth,
 		int numberTicks, float startAngle, float stopAngle,
         float startRadius, float endRadius);
 
 void LabelDialTicks (MagickWand *wand, 
-		const char *color, float radius,
+		const char *color, const char *font, float radius,
 		int numberTicks, float startAngle, float stopAngle,
 		float startLabel, float stopLabel, const char *formatSpecifier);
 
