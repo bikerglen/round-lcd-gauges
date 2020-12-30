@@ -4,7 +4,8 @@
 void DrawPointerBackground (MagickWand *wand);
 
 void DrawPointerKnub (
-		MagickWand *wand, const char *color, float radius, float opacity);
+		MagickWand *wand, const char *color, float centerx, float centery,
+		float radius, float opacity);
 
 void DrawPointerNeedle (
 		MagickWand *wand, const char *color, 

@@ -19,7 +19,8 @@ void DrawPointerBackground (MagickWand *wand)
 
 
 void DrawPointerKnub (
-		MagickWand *wand, const char *color, float radius, float opacity)
+		MagickWand *wand, const char *color, float centerx, float centery,
+		float radius, float opacity)
 {
 	DrawingWand *drawingWand;
 	PixelWand *strokeColor;
@@ -36,7 +37,7 @@ void DrawPointerKnub (
 	DrawSetStrokeOpacity (drawingWand, 0.0);
 	DrawSetStrokeWidth (drawingWand, 0.0);
 	DrawSetFillOpacity (drawingWand, opacity);
-    DrawCircle (drawingWand, 119.5, 119.5, 120-radius-0.5, 120);
+    DrawCircle (drawingWand, centerx, centery, centerx-radius-0.5, centery);
 
     MagickResetIterator (wand);
     MagickDrawImage (wand, drawingWand);
