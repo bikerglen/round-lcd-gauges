@@ -66,8 +66,8 @@ int main (int argc, char *argv[])
 	wand = NewMagickWand ();
 
     DrawPointerBackground (wand);
-    DrawPointerKnub (wand, "#F45700", 119.5, 119.5, 10, 1);
-    DrawPointerNeedle (wand, "#F45700", 2.25, 103, 30, 1);
+    DrawPointerKnub (wand, "#F45700", 119.5, 119.5, 10.1, 1);
+    DrawPointerNeedle (wand, "#F45700", 2.25, 102.5, 30.5, 1);
 
     MagickResetIterator (wand);
     MagickWriteImage (wand, "pointer-red-basic.png");
@@ -82,8 +82,8 @@ int main (int argc, char *argv[])
     wand = NewMagickWand ();
 
     DrawPointerBackground (wand);
-    DrawPointerKnub (wand, "#808080", 119.5, 119.5, 10, 1);
-    DrawPointerNeedle (wand, "#808080", 2.25, 103, 30, 1);
+    DrawPointerKnub (wand, "#808080", 119.5, 119.5, 10.1, 1);
+    DrawPointerNeedle (wand, "#808080", 2.25, 102.5, 30.5, 1);
 
 	MagickResetIterator (wand);
     MagickWriteImage (wand, "shadow-red-basic.png");
@@ -100,7 +100,7 @@ int main (int argc, char *argv[])
 	wand = NewMagickWand ();
 
     DrawPointerBackground (wand);
-    DrawPointerKnub (wand, "#202020", 119.5, 119.5, 10, 1);
+    DrawPointerKnub (wand, "#202020", 119.5, 119.5, 10.1, 1);
     DrawPointerArrow (wand, "#202020", 95, 30, 10, 5, 1);
 
     MagickResetIterator (wand);
@@ -116,7 +116,7 @@ int main (int argc, char *argv[])
     wand = NewMagickWand ();
 
     DrawPointerBackground (wand);
-    DrawPointerKnub (wand, "#808080", 119.5, 119.5, 10, 1);
+    DrawPointerKnub (wand, "#808080", 119.5, 119.5, 10.1, 1);
     DrawPointerArrow (wand, "#808080", 95, 30, 10, 5, 1);
 
 	MagickResetIterator (wand);

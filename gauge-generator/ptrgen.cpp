@@ -37,7 +37,7 @@ void DrawPointerKnub (
 	DrawSetStrokeOpacity (drawingWand, 0.0);
 	DrawSetStrokeWidth (drawingWand, 0.0);
 	DrawSetFillOpacity (drawingWand, opacity);
-    DrawCircle (drawingWand, centerx, centery, centerx-radius-0.5, centery);
+    DrawCircle (drawingWand, centerx, centery, centerx-radius, centery);
 
     MagickResetIterator (wand);
     MagickDrawImage (wand, drawingWand);
@@ -62,7 +62,7 @@ void DrawPointerNeedle (
 	PixelSetColor (strokeColor, color);
 	DrawSetStrokeColor (drawingWand, strokeColor);
 	DrawSetStrokeOpacity (drawingWand, opacity);
-	DrawLine (drawingWand, 119.5, 120+tailRadius, 119.5, 120-tipRadius);
+	DrawLine (drawingWand, 119.5, 119.5+tailRadius, 119.5, 119.5-tipRadius);
 
     MagickResetIterator (wand);
     MagickDrawImage (wand, drawingWand);
