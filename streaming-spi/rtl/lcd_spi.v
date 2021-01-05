@@ -89,10 +89,10 @@ wire      	timebase_flag_clear;
 wire d8_write, d8_full;
 wire [7:0] d8_wr_data;
 
-wire d8_empty_sync;
-wire d16_full_sync;
-wire d16_empty_sync;
-wire lcd_busy_sync;
+reg d8_empty_sync;
+reg d16_empty_sync;
+reg lcd_busy_sync;
+reg lcd_inuse;
 
 lcd_spi_axil_tgt lcd_spi_axil_tgt
 (
@@ -123,9 +123,9 @@ lcd_spi_axil_tgt lcd_spi_axil_tgt
     .d8_wr_data                 (d8_wr_data),
     
     .d8_empty_sync              (d8_empty_sync),
-    .d16_full_sync              (d16_full_sync),
     .d16_empty_sync             (d16_empty_sync),
     .lcd_busy_sync              (lcd_busy_sync),
+    .lcd_inuse                  (lcd_inuse),
 
     .lcd_rst_n                  (lcd_rst_n),
 	.lcd_dc                     (lcd_dc),
@@ -247,10 +247,39 @@ lcd_spi_serializer lcd_spi_serializer
 // sycnhronizers for d8_empty, d16_full, d16_empty, and lcd_busy back to s00_axi_aclk domain and register interface
 //----------------------------------------
 
-// TODO -- d8_empty, d16_full, d16_empty, lcd_busy
-assign d8_empty_sync = 0;  // TODO
-assign d16_full_sync = 0;  // TODO
-assign d16_empty_sync = 0; // TODO
-assign lcd_busy_sync = 0;  // TODO
+reg d8_empty_z, d16_empty_z, lcd_busy_z, lcd_busy_sync_z;
+
+always @ (posedge mclk)
+begin
+    if (mclk_rst)
+    begin
+        d8_empty_z <= 0;
+        d8_empty_sync <= 0;
+        d16_empty_z <= 0;
+        d16_empty_sync <= 0;
+        lcd_busy_z <= 0;
+        lcd_busy_sync <= 0;
+        lcd_busy_sync_z <= 0;
+        lcd_inuse <= 0;
+    end
+    else
+    begin
+        d8_empty_z <= d8_empty;
+        d8_empty_sync <= d8_empty_z;
+        d16_empty_z <= d16_empty;
+        d16_empty_sync <= d16_empty_z;
+        lcd_busy_z <= lcd_busy;
+        lcd_busy_sync <= lcd_busy_z;
+        lcd_busy_sync_z <= lcd_busy_sync;
+        if (d8_write)
+        begin
+            lcd_inuse <= 1;
+        end
+        else if (lcd_busy_sync_z && !lcd_busy_sync)
+        begin
+            lcd_inuse <= 0;
+        end
+    end
+end
 
 endmodule

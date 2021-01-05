@@ -27,6 +27,7 @@ module lcd_spi_axil_tgt #
     input   wire                d16_full_sync,
     input   wire                d16_empty_sync,
     input   wire                lcd_busy_sync,
+    input   wire                lcd_inuse,
 
     // User ports ends
     // Do not modify the ports beyond this line
@@ -396,7 +397,7 @@ module lcd_spi_axil_tgt #
             6'h5   : reg_data_out <= { 31'b0, timebase_flag };
             6'h6   : reg_data_out <= { 29'b0, lcd_rst_n, lcd_dc, lcd_cs_n }; 
             // 6'h7: spi 8-bit axil write data register
-            6'h8   : reg_data_out <= { 27'b0, lcd_busy_sync, d16_empty_sync, d16_full_sync, d8_empty_sync, d8_full };
+            6'h8   : reg_data_out <= { 27'b0, lcd_inuse, lcd_busy_sync, d16_empty_sync, d8_empty_sync, d8_full };
             default : reg_data_out <= 0;
         endcase
     end

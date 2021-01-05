@@ -11,7 +11,7 @@ module lcd_spi_serializer
     input   wire    [15:0]  d16_data,
     output  reg             d16_read,
     
-    output  wire            lcd_busy,
+    output  reg             lcd_busy,
     
     output  reg             lcd_sclk,
     output  reg             lcd_data
@@ -30,7 +30,8 @@ module lcd_spi_serializer
         if (rst)
         begin
             d8_read <= 0;
-            d16_read <= 0;            
+            d16_read <= 0;
+            lcd_busy <= 0;            
             lcd_sclk <= 0;
             lcd_data <= 0;
             state <= IDLE;
@@ -45,12 +46,14 @@ module lcd_spi_serializer
             d8_read <= 0;
             d16_read <= 0;            
 
+            // state machine
             if (state == IDLE)
             begin
                 if (!d16_empty)
                 begin
                     d16_read <= 1;
                     state <= BUSY;
+                    lcd_busy <= 1;
                     bitnum <= 0;
                     txbits <= 16;
                     lcd_sclk <= 0;
@@ -62,6 +65,7 @@ module lcd_spi_serializer
                 begin
                     d8_read <= 1;
                     state <= BUSY;
+                    lcd_busy <= 1;
                     bitnum <= 0;
                     txbits <= 8;
                     lcd_sclk <= 0;
@@ -75,6 +79,7 @@ module lcd_spi_serializer
                     lcd_sclk <= 0;
                     lcd_data <= 0;
                     state <= IDLE;
+                    lcd_busy <= 0;
                 end
             end
             else
@@ -85,6 +90,7 @@ module lcd_spi_serializer
                     begin
                         d16_read <= 1;
                         state <= BUSY;
+                        lcd_busy <= 1;
                         bitnum <= 0;
                         txbits <= 16;
                         lcd_sclk <= 0;
@@ -96,6 +102,7 @@ module lcd_spi_serializer
                     begin
                         d8_read <= 1;
                         state <= BUSY;
+                        lcd_busy <= 1;
                         bitnum <= 0;
                         txbits <= 8;
                         lcd_sclk <= 0;
@@ -109,8 +116,9 @@ module lcd_spi_serializer
                         lcd_sclk <= 0;
                         lcd_data <= 0;
                         state <= IDLE;
+                        lcd_busy <= 0;
                     end
-                    end
+                end
                 else
                 begin
                     if (txphase == 1)
@@ -131,6 +139,4 @@ module lcd_spi_serializer
         end
     end
     
-    assign lcd_busy = state != IDLE;
-        
 endmodule
