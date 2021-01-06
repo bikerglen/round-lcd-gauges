@@ -47,8 +47,11 @@ void DisplayGauge (const uint32_t *dial, const uint32_t *needle, float angle)
   
   const uint32_t *ptrs1;
   uint32_t rgba_background;
+  uint32_t rb_background;
+  uint32_t ga_background;
   uint8_t lcdbuffer[2*240];
   uint8_t *lcdbuffp;
+  uint8_t alpha;
 
   // start writes to LCD
   LCD_SetPos (0, 0, 239, 239);
@@ -85,7 +88,7 @@ void DisplayGauge (const uint32_t *dial, const uint32_t *needle, float angle)
       //----------------------------------------
 
       if (xp < 0 || yp < 0 || xp > wm2 || yp > hm2) {
-        // if off the edge, write input colorval
+        // if off the edge, set to transparent
         rbval = 0;
         gaval = 0;
       } else {
@@ -95,7 +98,7 @@ void DisplayGauge (const uint32_t *dial, const uint32_t *needle, float angle)
         // which is faster but gives lousy results!
 
         lines = needle + yp * 240;
-  
+
         word00 = *(lines + xp);
         word10 = *(lines + xp + 1);
         word01 = *(lines + 240 + xp);
@@ -121,24 +124,20 @@ void DisplayGauge (const uint32_t *dial, const uint32_t *needle, float angle)
 
       rgba_background = *ptrs1++;
 
-      uint8_t rval = rbval >> 16;
-      uint8_t gval = gaval >> 16;
-      uint8_t bval = rbval;
-      uint8_t aval = gaval;
+      rb_background = (rgba_background >> 8) & mask;
+      ga_background = rgba_background & mask;
 
-      uint8_t rbg = rgba_background >> 24;
-      uint8_t gbg = rgba_background >> 16;
-      uint8_t bbg = rgba_background >>  8;
+      alpha = gaval;
 
-      // only blend non transparent pixels
-      if (aval != 0) {
-        rbg = ((255 - aval) * rbg + aval * rval) >> 8;
-        gbg = ((255 - aval) * gbg + aval * gval) >> 8;
-        bbg = ((255 - aval) * bbg + aval * bval) >> 8;
+      if (alpha != 0) {
+        rbval &= mask;
+        gaval &= mask;
+        rb_background = ((255 - alpha) * rb_background + alpha * rbval) >> 8;
+        ga_background = ((255 - alpha) * ga_background + alpha * gaval) >> 8;
       }
-      
-      *lcdbuffp++ = (rbg & 0xf8) | (gbg >> 5);
-      *lcdbuffp++ = ((gbg & 0x1c) << 3) | (bbg >> 3);
+
+      *lcdbuffp++ = ((rb_background >> 16) & 0xf8) | (ga_background >> 21);
+      *lcdbuffp++ = ((ga_background >> 13) & 0xE0) | ((rb_background >> 3) & 0x1f);
       
     } // j
 
