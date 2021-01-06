@@ -27,7 +27,6 @@ void loop (void)
   }
 }
 
-
 // line by line version to conserve RAM; see original commented out code below this function
 // area map rotate code from leptonica by Dan Bloomberg
 // see https://github.com/DanBloomberg/leptonica/blob/master/src/rotateam.c
@@ -101,6 +100,7 @@ void DisplayGauge (const uint32_t *dial, const uint32_t *needle, float angle)
         word10 = *(lines + xp + 1);
         word01 = *(lines + 240 + xp);
         word11 = *(lines + 240 + xp + 1);
+        
         rval = ((16 - xf) * (16 - yf) * ((word00 >> 24) & 0xff) +
                 xf * (16 - yf) * ((word10 >> 24) & 0xff) +
                 (16 - xf) * yf * ((word01 >> 24) & 0xff) +
@@ -129,12 +129,15 @@ void DisplayGauge (const uint32_t *dial, const uint32_t *needle, float angle)
       uint8_t gbg = rgba_background >> 16;
       uint8_t bbg = rgba_background >>  8;
 
-      uint8_t r = ((255 - aval) * rbg + aval * rval) >> 8;
-      uint8_t g = ((255 - aval) * gbg + aval * gval) >> 8;
-      uint8_t b = ((255 - aval) * bbg + aval * bval) >> 8;
-
-      *lcdbuffp++ = (r & 0xf8) | (g >> 5);
-      *lcdbuffp++ = ((g & 0x1c) << 3) | (b >> 3);
+      // only blend non transparent pixels
+      if (aval != 0) {
+        rbg = ((255 - aval) * rbg + aval * rval) >> 8;
+        gbg = ((255 - aval) * gbg + aval * gval) >> 8;
+        bbg = ((255 - aval) * bbg + aval * bval) >> 8;
+      }
+      
+      *lcdbuffp++ = (rbg & 0xf8) | (gbg >> 5);
+      *lcdbuffp++ = ((gbg & 0x1c) << 3) | (bbg >> 3);
       
     } // j
 
