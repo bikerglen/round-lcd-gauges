@@ -42,8 +42,10 @@ int main (int argc, char *argv[])
 	wand = NewMagickWand ();
 
     DrawPointerBackground (wand);
-    DrawPointerKnub (wand, "#ED3655", 119.5, 57, 12.5, 1);
-    DrawPointerNeedle (wand, "#ED3655", 3.0, 65, 35, 1);
+    // DrawPointerKnub (wand, "#ED3655", 119.5, 57, 12.5, 1);
+    DrawPointerCircle (wand, "#ED3655", 119.5, 57, 12.5, 3.0, 1);
+    DrawPointerNeedle (wand, "#ED3655", 3.0, 50, 25, 1);
+    DrawPointerNeedle (wand, "#ED3655", 3.0, 96, -75, 1);
 
     MagickResetIterator (wand);
     MagickWriteImage (wand, "pointer-clockish.png");

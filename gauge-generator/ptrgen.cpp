@@ -48,6 +48,34 @@ void DrawPointerKnub (
 }
 
 
+void DrawPointerCircle (
+		MagickWand *wand, const char *color, float centerx, float centery,
+		float radius, float strokeWidth, float opacity)
+{
+	DrawingWand *drawingWand;
+	PixelWand *strokeColor;
+	PixelWand *fillColor;
+
+    drawingWand = NewDrawingWand ();
+    strokeColor = NewPixelWand ();
+    fillColor = NewPixelWand ();
+
+    PixelSetColor (strokeColor, color);
+    PixelSetColor (fillColor, "none");
+    DrawSetFillColor (drawingWand, fillColor);
+    DrawSetStrokeColor (drawingWand, strokeColor);
+	DrawSetStrokeOpacity (drawingWand, opacity);
+	DrawSetStrokeWidth (drawingWand, strokeWidth);
+	DrawSetFillOpacity (drawingWand, 0.0);
+    DrawCircle (drawingWand, centerx, centery, centerx-radius, centery);
+
+    MagickResetIterator (wand);
+    MagickDrawImage (wand, drawingWand);
+
+    DestroyDrawingWand (drawingWand);
+    DestroyPixelWand (strokeColor);
+    DestroyPixelWand (fillColor);
+}
 void DrawPointerNeedle (
 		MagickWand *wand, const char *color, 
 		float strokeWidth, float tipRadius, float tailRadius, float opacity)
