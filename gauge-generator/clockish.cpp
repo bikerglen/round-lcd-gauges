@@ -20,7 +20,7 @@ int main (int argc, char *argv[])
 	wand = NewMagickWand ();
 
 	DrawDialBackground (wand);
-	DrawDialTicks (wand, "#363636", 6.0, 11, -150, 150, 79, 104);
+	DrawDialTicks (wand, "#363636", 5.0, 11, -150, 150, 79, 104);
 	DrawDialTicks (wand, "#363636", 2.5, 10, -144, 126, 97, 104);
 	DrawDialTicks (wand, "#363636", 2.5, 10, -138, 132, 97, 104);
 	DrawDialTicks (wand, "#363636", 2.5, 10, -132, 138, 97, 104);
