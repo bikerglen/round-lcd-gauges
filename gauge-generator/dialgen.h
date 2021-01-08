@@ -13,6 +13,11 @@ void LabelDialTicks (MagickWand *wand,
 		int numberTicks, float startAngle, float stopAngle,
 		float startLabel, float stopLabel, const char *formatSpecifier);
 
+void LabelDialTicks2 (MagickWand *wand, 
+		const char *color, const char *font, float size, float radius,
+		int numberTicks, float startAngle, float stopAngle, 
+		const char *labels[]);
+
 void LabelDial (MagickWand *wand, const char *color, const char *label);
 
 void LabelCo2Dial (MagickWand *wand, const char *color);

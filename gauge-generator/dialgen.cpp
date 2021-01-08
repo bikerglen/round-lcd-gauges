@@ -104,9 +104,9 @@ void DrawDialTicks (MagickWand *wand,
 		angle = startAngle + (float)i * (stopAngle - startAngle) / (numberTicks - 1);
 		angleCorrected = angle - 90;
 		angleRadians = angleCorrected / 180.0 * M_PI;
-		printf ("angle = %f\n", angle);
-		printf ("corrected = %f\n", angleCorrected);
-		printf ("radians = %f\n", angleRadians);
+		// printf ("angle = %f\n", angle);
+		// printf ("corrected = %f\n", angleCorrected);
+		// printf ("radians = %f\n", angleRadians);
 
 		x1 = 120 + cos (angleRadians) * startRadius;
 		y1 = 120 + sin (angleRadians) * startRadius;
@@ -158,7 +158,7 @@ void LabelDialTicks (MagickWand *wand,
 
 		labelValue = startLabel + (float)i * (stopLabel - startLabel) / (numberTicks - 1); 
 		sprintf (labelString, formatSpecifier, labelValue);
-		printf ("label = '%s'\n", labelString);
+		// printf ("label = '%s'\n", labelString);
 
 		metrics = MagickQueryFontMetrics (wand, drawingWand, labelString);
 		ascent = metrics[2];
@@ -180,6 +180,47 @@ void LabelDialTicks (MagickWand *wand,
 		DrawAnnotation (drawingWand, x1, y1, (const unsigned char *)labelString);
 
 		free (metrics);
+	}
+
+	MagickResetIterator (wand);
+	MagickDrawImage (wand, drawingWand);
+
+	DestroyDrawingWand (drawingWand);
+	DestroyPixelWand (fillColor);
+}
+
+
+void LabelDialTicks2 (MagickWand *wand,
+        const char *color, const char *font, float size, float radius,
+        int numberTicks, float startAngle, float stopAngle, const char *labels[])
+{
+	DrawingWand *drawingWand;
+	PixelWand *fillColor;
+	int i;
+	float angle, angleCorrected, angleRadians;
+	const char *label;
+
+	drawingWand = NewDrawingWand ();
+	fillColor = NewPixelWand ();
+
+	PixelSetColor (fillColor, color);
+	DrawSetFont (drawingWand, font);
+	DrawSetTextAlignment (drawingWand, CenterAlign);
+	DrawSetFontSize (drawingWand, size);
+	DrawSetFillColor (drawingWand, fillColor);
+
+	DrawTranslate (drawingWand, 120, 120);
+
+	for (i = 0; i < numberTicks; i++) {
+		angle = startAngle + (float)i * (stopAngle - startAngle) / (numberTicks - 1);
+		angleCorrected = angle - 90;
+		angleRadians = angleCorrected / 180.0 * M_PI;
+
+		label = labels[i];
+
+		angleRadians = -M_PI/2.0;
+		DrawAnnotation (drawingWand, 0, -radius, (const unsigned char *)label);
+		DrawRotate (drawingWand, 30);
 	}
 
 	MagickResetIterator (wand);
