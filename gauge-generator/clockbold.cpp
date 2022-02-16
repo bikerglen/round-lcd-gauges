@@ -42,7 +42,8 @@ int main (int argc, char *argv[])
     DrawDialTicks (wand, "#c0c0c0", 1.5, 12, -168, 162, 109, 116);
     DrawDialTicks (wand, "#c0c0c0", 1.5, 12, -162, 168, 109, 116);
     DrawDialTicks (wand, "#c0c0c0", 1.5, 12, -156, 174, 109, 116);
-	LabelDialTicks2 (wand, "#c0c0c0", "Oswald-Bold.ttf", 22, 77, 12, 0, 330, labels);
+	// LabelDialTicks2 (wand, "#c0c0c0", "Oswald-Bold.ttf", 22, 77, 12, 0, 330, labels);
+	LabelDialTicks  (wand, "#c0c0c0", "Oswald-Bold.ttf", 93, 12, 30, 360, 1, 12, "%0.0f");
 
 	// TODO
 
